@@ -1,14 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
+<!-- This whole document is an ejs file, which will be processed and then returned to the client as HTML -->
+<!DOCTYPE html>                             <!-- tells the browser that this is an HTML document -->
+<html lang="en">                            <!-- lanugage is english -->
+<head>                                      <!-- the head section is where metadata, title, links, and related stuff goes -->
+    <meta charset="UTF-8">                  <!-- says that we're using UTF-8 character encoding  -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">                   <!-- describes compatibility with Internet Explorer -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  <!-- sets viewport scale for maximium compatibility with mobile devices when using viewport related properties-->
+    <title>Document</title>                                                 <!-- Title of the page, which will show in the browser-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">   <!-- link the font-awesome css bits we'll need for icons -->
+    <link rel="stylesheet" href="css/style.css">                        <!-- link the css stylesheet -->
+</head>                                                                 <!-- end head section -->
+<!-- strongly suspect that the below was accidentally added since it's duplicated. Chose to chop this to maintain operability.
+    <body>
     <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,31 +19,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<body>
-    <h1>Todo List: </h1>
-    <ul class="todoItems">
-    <% for(let i=0; i < items.length; i++) {%>
-        <li class="item">
-            <% if(items[i].completed === true) {%>
-                <span class='completed'><%= items[i].thing %></span>
-            <% }else{ %>
-                <span><%= items[i].thing %></span>
-            <% } %>    
-            <span class='fa fa-trash'></span>
-        </li>
-    <% } %>
-    </ul>
+  end of chopped section -->
+<body>                                                                  <!-- main section for displayed content -->
+    <h1>Todo List: </h1>                                                <!-- main heading for the page -->
+    <ul class="todoItems">                                              <!-- the start of an unordered list (bullet-style), with the "todoItems" class (see CSS) -->
+    <% for(let i=0; i < items.length; i++) {%>                          <!-- EJS for loop that runs over the length of the "todos" array (see JS) -->
+        <li class="item">                                               <!-- loop adds a list item with the "item" class -->
+            <% if(items[i].completed === true) {%>                      <!-- if the item's "completed" property is true, do the following (more EJS) -->
+                <span class='completed'><%= items[i].thing %></span>    <!-- add that item to a span with class "completed" -->
+            <% }else{ %>                                                <!-- otherwise (item not marked as completed), do the following: -->
+                <span><%= items[i].thing %></span>                      <!-- add that item to a span with no class (again, using EJS for the name of the thing)-->
+            <% } %>                                                     <!-- end of the if/else conditional-->
+            <span class='fa fa-trash'></span>                           <!-- add a span with the font-awesome class of 'fa-trash' (it's a trashcan icon)-->
+        </li>                                                           <!-- closes the list item element -->
+    <% } %>                                                             <!-- end of the EJS "for" loop -->
+    </ul>                                                               <!-- closes the unordered list -->
 
-    <h2>Left to do: <%= left %></h2>
+    <h2>Left to do: <%= left %></h2>                                    <!-- Level 2 heading, including a dab of EJS that pulls in # of todo-list items that are incomplete -->
 
-    <h2>Add A Todo:</h2>
+    <h2>Add A Todo:</h2>                                                <!-- Level 2 heading -->
 
-    <form action="/addTodo" method="POST">
-        <input type="text" placeholder="Thing To Do" name="todoItem">
-        <input type="submit">
-    </form>
+    <form action="/addTodo" method="POST">                              <!-- creates a form that uses the POST method to operate on the /addTodo route (action) -->
+        <input type="text" placeholder="Thing To Do" name="todoItem">   <!-- Text input with "Thing To Do" as default. Name of that input is "todoItem" (important!) -->
+        <input type="submit">                                           <!-- Submit button -->
+    </form>                                                             <!-- close the form element -->
     
 
-    <script src='js/main.js'></script>
-</body>
-</html>
+    <script src='js/main.js'></script>                                  <!-- runs the main.js script (last thing so as to avoid BLINK issues)-->
+</body>                                                                 <!-- close the body (the visible parts of the page)-->
+</html>                                                                 <!-- close the HTML -->

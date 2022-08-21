@@ -1,9 +1,8 @@
-const express = require('express') //Requires Express. We will access Express methods later in the document
-const app = express() //
-const MongoClient = require('mongodb').MongoClient
-const PORT = 2121
-require('dotenv').config()
-
+const express = require('express')  //Requires express package (needs to be installed)
+const app = express()               //Initializes the express package so that we can use the package. Makes easy use of express
+const MongoClient = require('mongodb').MongoClient  //Requires the MongoDB and client inside a variable so that we can access it later
+const PORT = 2121                   //PORT will define which port the app runs on, in this case as a backup to a Heroku auto-selected port
+require('dotenv').config()          //Holds secrets like a variable key (put in them in Heroku as variables)
 
 let db,
     dbConnectionStr = process.env.DB_STRING,
